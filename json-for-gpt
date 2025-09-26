@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LeadUpdate",
+  "type": "object",
+  "properties": {
+    "recordId": { "type": "string", "pattern": "^rec[a-zA-Z0-9]{14,}$" },
+    "name": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "status": { "type": "string", "enum": ["new", "qualified", "disqualified", "won", "lost"] },
+    "leadScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "nextStep": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "required": ["recordId", "status"],
+  "additionalProperties": false
+}
