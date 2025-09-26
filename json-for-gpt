@@ -1,16 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "LeadUpdate",
+  "title": "PhoneNormalizationResult",
   "type": "object",
   "properties": {
-    "recordId": { "type": "string", "pattern": "^rec[a-zA-Z0-9]{14,}$" },
-    "name": { "type": "string" },
-    "email": { "type": "string", "format": "email" },
-    "status": { "type": "string", "enum": ["new", "qualified", "disqualified", "won", "lost"] },
-    "leadScore": { "type": "integer", "minimum": 0, "maximum": 100 },
-    "nextStep": { "type": "string" },
-    "notes": { "type": "string" }
+    "international": {
+      "description": "Format international complet E.164 sans espaces, ex: +32483350333. Vide si invalide/partiel.",
+      "type": "string",
+      "anyOf": [
+        { "const": "" },
+        { "pattern": "^\\+[1-9]\\d{7,14}$" }
+      ]
+    },
+    "lisible": {
+      "description": "Version lisible avec espaces, ex: +32 483 35 03 33. Vide si invalide/partiel.",
+      "type": "string",
+      "anyOf": [
+        { "const": "" },
+        { "pattern": "^\\+[0-9](?:[0-9 ]{7,20})$" }
+      ]
+    }
   },
-  "required": ["recordId", "status"],
-  "additionalProperties": false
+  "required": ["international", "lisible"],
+  "additionalProperties": false,
+  "examples": [
+    { "international": "+32483350333", "lisible": "+32 483 35 03 33" },
+    { "international": "", "lisible": "" }
+  ]
 }
