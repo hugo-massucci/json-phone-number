@@ -1,29 +1,17 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "PhoneNormalizationResult",
   "type": "object",
   "properties": {
     "international": {
-      "description": "Format international complet E.164 sans espaces, ex: +32483350333. Vide si invalide/partiel.",
       "type": "string",
-      "anyOf": [
-        { "const": "" },
-        { "pattern": "^\\+[1-9]\\d{7,14}$" }
-      ]
+      "description": "Numéro au format international complet (E.164) sans espaces. Exemple: +32483350333. Vide si invalide."
     },
     "lisible": {
-      "description": "Version lisible avec espaces, ex: +32 483 35 03 33. Vide si invalide/partiel.",
       "type": "string",
-      "anyOf": [
-        { "const": "" },
-        { "pattern": "^\\+[0-9](?:[0-9 ]{7,20})$" }
-      ]
+      "description": "Numéro lisible avec espaces. Exemple: +32 483 35 03 33. Vide si invalide."
     }
   },
   "required": ["international", "lisible"],
-  "additionalProperties": false,
-  "examples": [
-    { "international": "+32483350333", "lisible": "+32 483 35 03 33" },
-    { "international": "", "lisible": "" }
-  ]
+  "additionalProperties": false
 }
